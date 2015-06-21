@@ -45,3 +45,16 @@ def sum_series(y, e=0, f=1):
 
 # Enter y, e, f in function call.
 sum_series()
+
+
+if __name__ == 'fibonacci':
+    # The 3rd number of fibonacci = 1
+    assert fibonacci(3) == 1
+
+if __name__ == 'lucas':
+    # The 4th number of lucas = 5
+    assert lucas(4) == 5
+
+if __name__ == 'sum_series':
+    # The 4th number of sum_series with parameters 2,3 = 8
+    assert sum_series(4, 2, 3) == 8
