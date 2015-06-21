@@ -26,3 +26,17 @@ def lucas(x):
 
 # Enter x in function call
 lucas()
+
+
+def sum_series(y, e=0, f=1):
+    if y == 0:
+        return 0
+    elif y == 1:
+        return 1
+    else:
+        for i in range(y - 1):
+            e, f = f, e + f
+    return e
+
+# Enter y, e, f in function call.
+sum_series()
