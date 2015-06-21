@@ -1,6 +1,8 @@
 def fibonacci(n):
     """Loop n-1 times and return n unless n=0 or n=1."""
-    if n == 0:
+    if n < 0:
+        print("Not in scope of assignment, please provide positive number.")
+    elif n == 0:
         return 0
     elif n == 1:
         return 1
@@ -29,7 +31,10 @@ lucas()
 
 
 def sum_series(y, e=0, f=1):
-    if y == 0:
+    """Loop y-1 times with default parameters e, f."""
+    if y < 0:
+        print("Not in scope of assignment, please provide positive number.")
+    elif y == 0:
         return 0
     elif y == 1:
         return 1
