@@ -1,0 +1,111 @@
+Name: Samantha Prince
+CSE 140
+Homework 2
+
+For each problem that requires a written answer, write (or copy-and-paste)
+your answers in this file.  When you are done, you should have replaced all
+the ellipses (the three dots) with your answers.
+
+At the end, you will turn in this file along with your modified
+dna_analysis.py program.
+
+
+Problem 1:
+
+(No answers in this file.)
+
+Problem 2:
+
+sample_1:
+    GC-content: 0.43059987061138255
+sample_2:
+    GC-content: 0.4514286106147601
+sample_3:
+    GC-content: 0.646867173111056
+sample_4:
+    GC-content: 0.3478539791909817
+sample_5:
+    GC-content: 0.26666666666666666
+sample_6:
+    GC-content: 0.4917006298629122
+
+Problem 3:
+
+When you run the program you receive an NameError that states name 'linenum' is 
+not defined.  This happens because you define the current line number of DNA 
+is being read on line 34 in the code.  When you comment out this line, and try to 
+call linenum on line 38 in the code, it has not been declared or assigned a value yet.
+Commenting out seq”” removes the place for the nucleotides that have been read to go.
+
+When commenting out gc_count = 0, a similar event happens.  Running the code produces
+a NameError and states that gc_count is undefined.  You must first define a variable
+to use it.
+
+Problem 4:
+
+GC-content: 0.43059987061138255
+AT-content: 0.5694001293886175
+
+Problem 5:
+
+G-content: 0.21269891276127206
+C-content: 0.21790095785011046
+A-content: 0.28543651609194487
+T-content: 0.28396361329667263
+
+Problem 6:
+
+In all files, the metrics for the sum of a+t+c+g differed from the total count 
+and the length of the sequence.  These differ because we only count the total number 
+of the nucleotides ’A’, ’T’, ‘C’, ‘G’.  The DNA files also contained ’N’ to allow 
+for human interpretation of the base.  The ’N’ count is included in the total count
+and the length of sequence while it was not included in the sum of ATCG.  As expected
+the length of sequence and the total count were always the same.
+
+The sum of ATCG could successfully be used in the denmoniator because it does not include the 
+’N’ count.  You could also use (total_count - n_count) in the denominator to as well.  The only 
+flaw that would occur with using (total_count - n_count) would be if the computer threw something
+other than ATCG or N in the sequence.
+
+My program originally incorrectly calculated the the ATCG content because it was dividing by the
+total count.   
+
+Problem 7:
+
+AT/GC ratio: 1.3223416174746196
+
+Problem 8:
+
+The organism is considered “moderate GC content”
+GC-content: 0.43059987061138255
+G-content: 0.21269891276127206
+C-content: 0.21790095785011046
+AT-content: 0.5694001293886175
+A-content: 0.28543651609194487
+T-content: 0.28396361329667263
+Total count: 27000000
+Sum of A,T,C,G: 26980735
+Length of sequence: 27000000
+N-content: 19265
+AT/GC ratio: 1.3223416174746196
+
+Collaboration:
+
+I did not collaborate with anyone.  I reviewed overall logical concepts with my husband
+but he has no experience with programming and was just a sounding board for 
+logical thinking.
+
+Reflection:
+
+I learned that I should start my homework earlier than I will think I need to.
+
+I also learned that when using large amounts of data, you should always do a ‘sanity check’
+to ensure that there aren’t errors in your data.  The errors can come from human input 
+or the computer, but either way it is important to make sense of your results.
+
+Part of the homework that I struggled with was getting the diff checker to work.  
+
+I would let future students know that you should always ask questions.  I would also encourage
+other students to comment their code to make sure you know what each piece does. It was
+also helpful to test different pieces by commenting out small sections and testing small
+pieces.
