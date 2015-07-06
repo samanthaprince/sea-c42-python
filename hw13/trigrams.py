@@ -14,7 +14,7 @@ def read_text(lines):
 
 def generate_new_text(d):
     new_text_story = ""
-    for x in range(5):
+    for x in range(1):
         new_sentence = list(random.choice(list(d.keys())))
         new_sentence[0] = new_sentence[0].capitalize()
         for y in range(random.randint(5, 10)):
