@@ -6,7 +6,7 @@ d = {}
 
 def read_text(lines):
     for x in range(0, len(lines) - 1):
-        words = lines[x].split()
+        words = lines[x].lower().split()
         for y in range(0, len(words) - 2):
             d[(words[y], words[y + 1])] = [words[y + 2]]
     generate_new_text(d)
@@ -20,7 +20,7 @@ def generate_new_text(d):
         for y in range(random.randint(5, 10)):
             words = random.choice(list(d.keys()))
             new_sentence.extend(words)
-        new_sentence[-1] += ".  "
+        new_sentence[-1] += ". "
         new_sentence = " ".join(new_sentence)
         new_text_story += new_sentence
     print(new_text_story)
