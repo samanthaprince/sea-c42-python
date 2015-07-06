@@ -6,6 +6,7 @@ import csv
 import os
 import time
 
+
 def read_csv(path):
     """
     Reads the CSV file at path, and returns a list of rows. Each row is a
@@ -17,9 +18,9 @@ def read_csv(path):
     return output
 
 
-################################################################################
+###############################################################################
 # Problem 1: State edges
-################################################################################
+###############################################################################
 
 def row_to_edge(row):
     """
@@ -28,34 +29,57 @@ def row_to_edge(row):
     """
     return float(row["Dem"]) - float(row["Rep"])
 
+
 def state_edges(election_result_rows):
     """
     Given a list of *ElectionDataRow*s, returns *StateEdge*s.
     The input list has no duplicate *States*;
     that is, each *State* is represented at most once in the input list.
     """
-    #TODO: Implement this function
-    pass
+
+    d = {}
+    for row in election_result_rows:
+        state = row['State']
+        dem = row['Dem']
+        rep = row['Rep']
+        d[state] = float(dem) - float(rep)
+    return d
 
 
-################################################################################
+###############################################################################
 # Problem 2: Find the most recent poll row
-################################################################################
+###############################################################################
 
 def earlier_date(date1, date2):
     """
     Given two dates as strings (formatted like "Oct 06 2012"), returns True if
     date1 is before date2.
     """
-    return (time.strptime(date1, "%b %d %Y") < time.strptime(date2, "%b %d %Y"))
+    return (time.strptime(date1, "%b %d %Y") <
+            time.strptime(date2, "%b %d %Y"))
+
 
 def most_recent_poll_row(poll_rows, pollster, state):
     """
     Given a list of *PollDataRow*s, returns the most recent row with the
     specified *Pollster* and *State*. If no such row exists, returns None.
     """
-    #TODO: Implement this function
-    pass
+    # arbirtary begining date of my b-day for comparison since before election
+    start_date = "Dec 28 1987"
+
+    no_earlier_date = None
+
+    for d in poll_rows:
+        if (d['Pollster'] == pollster and d['State'] == state and
+                earlier_date(start_date, d['Date'])):
+            start_date = d['Date']
+
+            no_earlier_date = d
+
+        else:
+            pass
+
+    return no_earlier_date
 
 
 ################################################################################
