@@ -45,10 +45,20 @@ def state_edges(election_result_rows):
         d[state] = float(dem) - float(rep)
     return d
 
+# or it could be:
+# d = {}
+# for row in election_result_rows:
+    # d[row['State']] = row_to_edge(row)
+    # return d
+
+# or it oculd be:
+# d = {row['State]:row_to_edge(row) for row in election_result_rows}
+# return d
 
 ###############################################################################
 # Problem 2: Find the most recent poll row
 ###############################################################################
+
 
 def earlier_date(date1, date2):
     """
@@ -81,31 +91,43 @@ def most_recent_poll_row(poll_rows, pollster, state):
 
     return no_earlier_date
 
+# or this :
 
-################################################################################
+# ids = []
+
+# for i in sorted(poll_rows, key=lambda n: time.strptime(n['Date'], '%b %d %y')):
+    # if (i["Pollster"] == pollster and i["state"] == state):
+    # ids.append(i)
+# if (len(ids) == 0):
+    # return None
+
+# return ids[-1]
+
+
+###############################################################################
 # Problem 3: Pollster predictions
-################################################################################
+###############################################################################
 
 def unique_column_values(rows, column_name):
     """
     Given a list of rows and the name of a column (a string),
     returns a set containing all values in that column.
     """
-    #TODO: Implement this function
-    pass
+
+
 
 def pollster_predictions(poll_rows):
     """
     Given a list of *PollDataRow*s, returns *PollsterPredictions*.
     For a given pollster, uses only the most recent poll for a state.
     """
-    #TODO: Implement this function
+    # TODO: Implement this function
     pass
 
 
-################################################################################
+###############################################################################
 # Problem 4: Pollster errors
-################################################################################
+###############################################################################
 
 def average_error(state_edges_predicted, state_edges_actual):
     """
