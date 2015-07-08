@@ -47,6 +47,7 @@ def state_edges(election_result_rows):
 
 # More Pythonic answer:
     d = {row['State']: row_to_edge(row) for row in election_result_rows}
+
     return d
 
 ###############################################################################
@@ -68,6 +69,7 @@ def most_recent_poll_row(poll_rows, pollster, state):
     Given a list of *PollDataRow*s, returns the most recent row with the
     specified *Pollster* and *State*. If no such row exists, returns None.
     """
+    # Original answer
     # arbirtary begining date of my b-day for comparison since before election
     start_date = "Dec 28 1987"
 
@@ -85,14 +87,16 @@ def most_recent_poll_row(poll_rows, pollster, state):
 
     return no_earlier_date
 
-# or this :
+# More Pythonic answer with less code:
 
-# ids = []
+    # ids = []
 
-# for i in sorted(poll_rows, key=lambda n: time.strptime(n['Date'], '%b %d %y')):
-    # if (i["Pollster"] == pollster and i["state"] == state):
-    # ids.append(i)
-# if (len(ids) == 0):
+    # for i in sorted(poll_rows, key=lambda n: time.strptime(n['Date'], '%b %d %y')):
+        # if (i["Pollster"] == pollster and i["state"] == state):
+        # ids.append(i)
+
+        # if (len(ids) == 0):
+
     # return None
 
 # return ids[-1]
