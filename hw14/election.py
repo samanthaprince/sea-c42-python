@@ -114,6 +114,12 @@ def unique_column_values(rows, column_name):
     returns a set containing all values in that column.
     """
 
+    column_values = set()
+
+    for x in rows:
+        column_values.add(x[column_name])
+
+    return column_values
 
 
 def pollster_predictions(poll_rows):
@@ -121,9 +127,22 @@ def pollster_predictions(poll_rows):
     Given a list of *PollDataRow*s, returns *PollsterPredictions*.
     For a given pollster, uses only the most recent poll for a state.
     """
-    # TODO: Implement this function
-    pass
 
+    state_data = unique_column_values(poll_rows, 'State')
+    pollster_data = unique_column_values(poll_rows, 'Pollster')
+
+    d = {}
+    for pollster in pollster_data:
+        list = []
+        for state in state_data:
+            recent_poll = most_recent_poll_row(poll_rows, pollster, state)
+
+            if recent_poll is not None:
+                list.append(recent_poll)
+
+            elif len(list) > 0:
+                d[pollster] = state_edges(list)
+    return d
 
 ###############################################################################
 # Problem 4: Pollster errors
