@@ -36,24 +36,18 @@ def state_edges(election_result_rows):
     The input list has no duplicate *States*;
     that is, each *State* is represented at most once in the input list.
     """
-
-    d = {}
-    for row in election_result_rows:
-        state = row['State']
-        dem = row['Dem']
-        rep = row['Rep']
-        d[state] = float(dem) - float(rep)
-    return d
-
-# or it could be:
-# d = {}
-# for row in election_result_rows:
-    # d[row['State']] = row_to_edge(row)
+# my original answer
+    # d = {}
+    # for row in election_result_rows:
+        # state = row['State']
+        # dem = row['Dem']
+        # rep = row['Rep']
+        # d[state] = float(dem) - float(rep)
     # return d
 
-# or it oculd be:
-# d = {row['State]:row_to_edge(row) for row in election_result_rows}
-# return d
+# More Pythonic answer:
+    d = {row['State']: row_to_edge(row) for row in election_result_rows}
+    return d
 
 ###############################################################################
 # Problem 2: Find the most recent poll row
@@ -133,15 +127,15 @@ def pollster_predictions(poll_rows):
 
     d = {}
     for pollster in pollster_data:
-        list = []
+        new_list = []
         for state in state_data:
             recent_poll = most_recent_poll_row(poll_rows, pollster, state)
 
             if recent_poll is not None:
-                list.append(recent_poll)
+                new_list.append(recent_poll)
 
-            elif len(list) > 0:
-                d[pollster] = state_edges(list)
+            if len(new_list) > 0:
+                d[pollster] = state_edges(new_list)
     return d
 
 ###############################################################################
