@@ -26,11 +26,9 @@ def render(page, filename):
     f = io.StringIO()
     page.render(f)
 
-    f.seek(0)
-    print(f.read())
+    print(f.getvalue())
 
-    f.seek(0)
-    codecs.open(filename, 'w', encoding="utf-8").write(f.read())
+    codecs.open(filename, 'w', encoding="utf-8").write(f.getvalue())
 
 
 ## Step 1
