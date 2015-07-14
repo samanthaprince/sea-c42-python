@@ -92,3 +92,18 @@ class P(Element):
     # def __init__(self, content=""):
     # Element.__init__(self, name="p", content=content)
     # self.indent = "        "
+
+
+class SelfClosingTag(Element):
+    def render(self, out_file, indent=""):
+        out_file.write(self.indent + "<" + self.name + self.attr + "/>\n")
+
+
+class Hr(SelfClosingTag):
+
+    name = "hr"
+
+
+class Br(SelfClosingTag):
+
+    name = "br"
