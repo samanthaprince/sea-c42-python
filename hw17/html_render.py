@@ -8,17 +8,22 @@ Python class example.
 
 class Element(object):
     IND_LEVEL = "    "
+    name = "html"
 
-    def __init__(self, name="", content=""):
-        self.name = name
+    def __init__(self, content="", **kwargs):
+        self.attributes = kwargs
+        self.attr = ""
         self.children = [content] if content else []
-        self.indent = "    "
+        for attr_key, attr_val in self.attributes.items():
+            self.attr += "{key}=\"{val}\"".format(key=attr_key, val=attr_val)
 
     def append(self, new_child):
         self.children.append(new_child)
 
+    indent = "    "
+
     def render(self, out_file, indent=""):
-        out_file.write("{}<{}>\n".format(self.indent, self.name))
+        out_file.write(self.indent + "<" + self.name + self.attr + ">\n")
 
         for child in self.children:
             try:
@@ -31,6 +36,8 @@ class Element(object):
 
 class Html(Element):
 
+    name = "html"
+
     def __init__(self, content=""):
         Element.__init__(self, name="html")
         self.indent = ""
@@ -42,8 +49,10 @@ class Html(Element):
 
 class Head(Element):
 
-    def __init__(self, content=""):
-        Element.__init__(self, name="head")
+    name = "head"
+
+    # def __init__(self, content=""):
+    # Element.__init__(self, name="head")
 
 
 class OneLineTag(Element):
@@ -59,7 +68,9 @@ class OneLineTag(Element):
         out_file.write("</" + self.name + ">\n")
 
 
-class Title(Element):
+class Title(OneLineTag):
+
+    name = "title"
 
     def __init__(self, content=""):
         Element.__init__(self, name="title", content=content)
@@ -67,12 +78,17 @@ class Title(Element):
 
 class Body(Element):
 
-    def __init__(self, content=""):
-        Element.__init__(self, name="body", content=content)
+    name = "body"
+
+    # def __init__(self, content=""):
+    # Element.__init__(self, name="body", content=content)
 
 
 class P(Element):
 
-    def __init__(self, content=""):
-        Element.__init__(self, name="p", content=content)
-        self.indent = "        "
+    name = "p"
+    indent = "        "
+
+    # def __init__(self, content=""):
+    # Element.__init__(self, name="p", content=content)
+    # self.indent = "        "
