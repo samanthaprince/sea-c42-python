@@ -40,6 +40,31 @@ class Html(Element):
         Element.render(self, out_file)
 
 
+class Head(Element):
+
+    def __init__(self, content=""):
+        Element.__init__(self, name="head")
+
+
+class OneLineTag(Element):
+    def render(self, out_file, content):
+        out_file.write(self.indent + "<" + self.name + ">")
+
+        for child in self.children:
+            try:
+                child.render(out_file, self.indent)
+            except AttributeError:
+                out_file.write(child)
+
+        out_file.write("</" + self.name + ">\n")
+
+
+class Title(Element):
+
+    def __init__(self, content=""):
+        Element.__init__(self, name="title", content=content)
+
+
 class Body(Element):
 
     def __init__(self, content=""):
