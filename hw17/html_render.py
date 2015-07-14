@@ -51,9 +51,6 @@ class Head(Element):
 
     name = "head"
 
-    # def __init__(self, content=""):
-    # Element.__init__(self, name="head")
-
 
 class OneLineTag(Element):
     def render(self, out_file, content):
@@ -68,6 +65,15 @@ class OneLineTag(Element):
         out_file.write("</" + self.name + ">\n")
 
 
+class A(OneLineTag):
+    name = "a"
+
+    def __init__(self, link, content):
+        self.link = link
+        self.content = content
+        Element.__init__(self, href=link, content=content)
+
+
 class Title(OneLineTag):
 
     name = "title"
@@ -80,18 +86,11 @@ class Body(Element):
 
     name = "body"
 
-    # def __init__(self, content=""):
-    # Element.__init__(self, name="body", content=content)
-
 
 class P(Element):
 
     name = "p"
     indent = "        "
-
-    # def __init__(self, content=""):
-    # Element.__init__(self, name="p", content=content)
-    # self.indent = "        "
 
 
 class SelfClosingTag(Element):
