@@ -1,12 +1,44 @@
 def start_screen():
     """Opening screen to inform user of program options."""
-    menu_option = """Welcome to Mailroom Madness\n
-                Choose from the following:\n
-                T - Send a (T)hank You\n
-                R - Create a (R)eport\n
-                quit - Quit the program\n"""
+    opener = "Welcome to Mailroom Madness"
+    menu_option = """
+    Choose from the following:\n
+    T - Send a (T)hank You\n
+    R - Create a (R)eport\n
+    quit - Quit the program\n"""
+
+    print(opener)
+    path = input(menu_option)
+
+    while path:
+        path = input("Please enter from the selections given\n" + menu_option)
+        path = check_valid_path(path)
+
+
+def check_valid_path(path):
+    unvalid = True
+    try:
+        path = path.lower()
+        if path == "q" or path == "quit":
+            exit()
+        elif path == "r":
+            generate_report()
+        elif path == "t":
+            thankyou()
+        else:
+            return unvalid
+    except TypeError:
+        return unvalid
+
+def thankyou():
+    menu_option = """
+    Please enter a name or choose from the following:\n
+    list - Print a list of previous donors\n
+    quit - Return to the main menu\n"""
 
     print(menu_option)
+
+    path = input()
 
 donor_list = {
     'Margie DeBella': [100, 95],
@@ -66,15 +98,10 @@ def print_letter(donor, amount):
 if __name__ == '__main__':
 
     start_screen()
-    path = input("What would you like to do first?  ")
 
-    if (path.upper() == 'R'):
-        generate_report()
 
     elif (path.upper() == 'T'):
-        donor = input("Please enter a name or choose from the following:\n"
-                      "list - Print a list of previous donors\n"
-                      "quit - Return to the main menu :  ")
+
 
         if (donor.lower() == 'q' or donor.lower() == 'quit'):
             start_screen()
