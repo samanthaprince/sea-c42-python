@@ -97,10 +97,10 @@ def donor_name_only():
 def donor_add(donor, donation):
     """Add donor to database"""
     if donor not in donor_list:
-        donor_list[donor].append(donation)
+        donor_list[donor].append[donation]
+    donation = donation_add(donor)
+    while not isinstance(donation, float) or donation < 0:
         donation = donation_add(donor)
-        while not isinstance(donation, float) or donation < 0:
-            donation = donation_add(donor)
 
     donor_list[donor].append[donation]
     print_letter(donor, donation)
