@@ -1,11 +1,12 @@
 def start_screen():
     """Opening screen to inform user of program options."""
-    print("Welcome to Mailroom Madness\n")
-    print("Choose from the following:\n")
-    print("T - Send a (T)hank You")
-    print("R - Create a (R)eport")
-    print("quit - Quit the program\n")
+    menu_option = """Welcome to Mailroom Madness\n
+                Choose from the following:\n
+                T - Send a (T)hank You\n
+                R - Create a (R)eport\n
+                quit - Quit the program\n"""
 
+    print(menu_option)
 
 donor_list = {
     'Margie DeBella': [100, 95],
@@ -19,6 +20,7 @@ def generate_report():
     """Generates a report for user with key information
        still doesn't print sorted"""
     print("Name \t\t|Total \t|# | Average\n" + ("_" * 40))
+
     sorted_list = sorted(donor_list, key=lambda donor: sum(donor_list[donor]),
                          reverse=True)
     for key in sorted_list:
@@ -70,10 +72,10 @@ if __name__ == '__main__':
         generate_report()
 
     elif (path.upper() == 'T'):
-        donor = input("Please enter a name or choose from the following: \n"
+        donor = input("Please enter a name or choose from the following:\n"
                       "list - Print a list of previous donors\n"
                       "quit - Return to the main menu :  ")
-        amount = int(input("Please enter a donation amount or 'quit': "))
+
         if (donor.lower() == 'q' or donor.lower() == 'quit'):
             start_screen()
 
@@ -82,21 +84,22 @@ if __name__ == '__main__':
             print(donor_name_only())
 
         else:
-            name_in_list = False
-            for key in donor_list:
-                if donor == key:
-                    name_in_list = True
-                    break
+            while True:
+                try:
+                    amount = int(input("Please enter a donation amount: "))
+                except ValueError:
+                    print("Invalid! Please enter a number.")
+                    continue
                 else:
-                    name_in_list = False
+                    break
 
-        if (name_in_list is True):
-            donation_add(donor, amount)
-            print_letter(donor, amount)
-        else:
-            donor_add(donor, amount)
-            donation_add(donor, amount)
-            print_letter(donor, amount)
+            if donor in donor_list:
+                donation_add(donor, amount)
+                print_letter(donor, amount)
+            else:
+                donor_add(donor, amount)
+                donation_add(donor, amount)
+                print_letter(donor, amount)
 
-    elif (path.lower == 'q' or path.lower() == 'quit'):
-        quit()
+        if (path.lower == 'q' or path.lower() == 'quit'):
+            quit()
